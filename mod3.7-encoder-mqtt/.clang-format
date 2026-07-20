@@ -1,0 +1,52 @@
+---
+# Based on ESP-IDF Style Guide its AStyle parameters
+BasedOnStyle: LLVM
+
+# Indentation rules (--indent=spaces=4 --convert-tabs)
+UseTab: Never
+IndentWidth: 4
+TabWidth: 4
+
+# Column limit rule (--max-continuation-indent=120)
+ColumnLimit: 120
+
+# Brace style choices (--style=otbs --attach-namespaces --attach-classes)
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterFunction: true
+  AfterNamespace: false
+  AfterObjCDeclaration: false
+  AfterStruct: false
+  AfterUnion: false
+  BeforeCatch: false
+  BeforeElse: false
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+
+# Pointer/Reference rules (--align-reference=name)
+# Note: Clang-Format combines pointer and reference alignment behaviors.
+PointerAlignment: Right
+
+# Whitespace modifications (--pad-header --pad-oper --unpad-paren)
+SpaceAfterCStyleCast: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInContainerLiterals: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+# Code packing settings (--keep-one-line-statements)
+AllowShortBlocksOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# Include block sort management (Optional, keeps ESP-IDF includes organized)
+SortIncludes: Never
+...

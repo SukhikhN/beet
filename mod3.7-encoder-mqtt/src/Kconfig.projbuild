@@ -1,0 +1,27 @@
+menu "Project Configuration"
+
+    config ESP_WIFI_SSID
+        string "WiFi SSID"
+        default "myssid"
+        help
+            WiFi SSID (network name).
+
+    config ESP_WIFI_PASSWORD
+        string "WiFi password"
+        default "mypassword"
+        help
+            WiFi password (WPA or WPA2).
+
+    config ESP_WIFI_MAXIMUM_RETRY
+        int "WiFi maximum retry"
+        default 5
+        help
+            Set the maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
+
+    config MQTT_BROKER_URL
+        string "MQTT broker URL"
+        default "mqtt://test.mosquitto.org:1883"
+        help
+            URL of the MQTT broker (including port).
+
+endmenu
