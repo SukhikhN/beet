@@ -1,8 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    stm32f4xx_it.h
-  * @brief   This file contains the headers of the interrupt handlers.
+  * @file    gpio.h
+  * @brief   This file contains all the function prototypes for
+  *          the gpio.c file
   ******************************************************************************
   * @attention
   *
@@ -16,43 +17,33 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F4xx_IT_H
-#define __STM32F4xx_IT_H
+#ifndef __GPIO_H__
+#define __GPIO_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Private includes ----------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
+/* USER CODE BEGIN Private defines */
 
-/* USER CODE END ET */
+/* USER CODE END Private defines */
 
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
+void MX_GPIO_Init(void);
 
-/* USER CODE END EC */
+/* USER CODE BEGIN Prototypes */
 
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
-
-/* USER CODE END EM */
-
-/* Exported functions prototypes ---------------------------------------------*/
-void OTG_FS_IRQHandler(void);
-/* USER CODE BEGIN EFP */
-
-/* USER CODE END EFP */
+/* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
 #endif
+#endif /*__ GPIO_H__ */
 
-#endif /* __STM32F4xx_IT_H */

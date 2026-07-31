@@ -1,8 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    stm32f4xx_it.h
-  * @brief   This file contains the headers of the interrupt handlers.
+  * @file    usart.h
+  * @brief   This file contains all the function prototypes for
+  *          the usart.c file
   ******************************************************************************
   * @attention
   *
@@ -16,43 +17,36 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F4xx_IT_H
-#define __STM32F4xx_IT_H
+#ifndef __USART_H__
+#define __USART_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Private includes ----------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
+extern UART_HandleTypeDef huart1;
 
-/* USER CODE END ET */
+/* USER CODE BEGIN Private defines */
 
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
+/* USER CODE END Private defines */
 
-/* USER CODE END EC */
+void MX_USART1_UART_Init(void);
 
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
+/* USER CODE BEGIN Prototypes */
 
-/* USER CODE END EM */
-
-/* Exported functions prototypes ---------------------------------------------*/
-void OTG_FS_IRQHandler(void);
-/* USER CODE BEGIN EFP */
-
-/* USER CODE END EFP */
+/* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __STM32F4xx_IT_H */
+#endif /* __USART_H__ */
+
