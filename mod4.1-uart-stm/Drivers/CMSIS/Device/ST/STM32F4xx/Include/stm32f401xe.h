@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    stm32f401xc.h
+  * @file    stm32f401xe.h
   * @author  MCD Application Team
-  * @brief   CMSIS STM32F401xC Device Peripheral Access Layer Header File.
+  * @brief   CMSIS STM32F401xE Device Peripheral Access Layer Header File.
   *
   *          This file contains:
   *           - Data structures and the address mapping for all peripherals
@@ -26,12 +26,12 @@
   * @{
   */
 
-/** @addtogroup stm32f401xc
+/** @addtogroup stm32f401xe
   * @{
   */
 
-#ifndef __STM32F401xC_H
-#define __STM32F401xC_H
+#ifndef __STM32F401xE_H
+#define __STM32F401xE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -633,12 +633,12 @@ typedef struct
   * @{
   */
 #define FLASH_BASE            0x08000000UL /*!< FLASH(up to 1 MB) base address in the alias region                         */
-#define SRAM1_BASE            0x20000000UL /*!< SRAM1(64 KB) base address in the alias region                              */
+#define SRAM1_BASE            0x20000000UL /*!< SRAM1(96 KB) base address in the alias region                              */
 #define PERIPH_BASE           0x40000000UL /*!< Peripheral base address in the alias region                                */
-#define SRAM1_BB_BASE         0x22000000UL /*!< SRAM1(64 KB) base address in the bit-band region                           */
+#define SRAM1_BB_BASE         0x22000000UL /*!< SRAM1(96 KB) base address in the bit-band region                           */
 #define PERIPH_BB_BASE        0x42000000UL /*!< Peripheral base address in the bit-band region                             */
 #define BKPSRAM_BB_BASE       0x42480000UL /*!< Backup SRAM(4 KB) base address in the bit-band region                      */
-#define FLASH_END             0x0803FFFFUL /*!< FLASH end address                                                          */
+#define FLASH_END             0x0807FFFFUL /*!< FLASH end address                                                          */
 #define FLASH_OTP_BASE        0x1FFF7800UL /*!< Base address of : (up to 528 Bytes) embedded FLASH OTP Area                */
 #define FLASH_OTP_END         0x1FFF7A0FUL /*!< End address of : (up to 528 Bytes) embedded FLASH OTP Area                 */
 
@@ -8642,4 +8642,4 @@ typedef struct
 }
 #endif /* __cplusplus */
 
-#endif /* __STM32F401xC_H */
+#endif /* __STM32F401xE_H */
