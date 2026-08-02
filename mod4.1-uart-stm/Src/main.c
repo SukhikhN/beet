@@ -20,11 +20,14 @@
 #include "main.h"
 #include "usart.h"
 #include "usb_device.h"
-#include "usbd_cdc_if.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
+#include <stdbool.h>
+
+#include "usbd_cdc_if.h"
 
 /* USER CODE END Includes */
 
@@ -46,6 +49,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+
+bool led_state = false;
+const uint32_t debounce_delay = 20; // milliseconds
 
 /* USER CODE END PV */
 
@@ -97,12 +103,43 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  bool last_key_state = false;
+  bool current_key_state = false;
+  bool key_state = false;
+  uint32_t current_time = HAL_GetTick();
+  uint32_t last_debounce_time = 0;
+
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+    current_key_state = HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin) == GPIO_PIN_RESET;
+    current_time = HAL_GetTick();
+
+    if (current_key_state != last_key_state)
+    {
+      last_debounce_time = current_time;
+    }
+
+    last_key_state = current_key_state;
+
+    if (current_time - last_debounce_time > debounce_delay)
+    {
+      if (current_key_state != key_state)
+      {
+        key_state = current_key_state;
+        if (key_state)
+        {
+          led_state = !led_state;
+          HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, led_state ? GPIO_PIN_RESET : GPIO_PIN_SET);
+          printf("LED state: %s\r\n", led_state ? "ON" : "OFF");
+        }
+      }
+    }
   }
+
   /* USER CODE END 3 */
 }
 
