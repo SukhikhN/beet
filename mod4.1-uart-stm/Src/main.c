@@ -1,4 +1,11 @@
 /* USER CODE BEGIN Header */
+/*
+LED Control Over UART
+
+This program allows control of an LED connected to a microcontroller via UART commands. The LED can be turned on, turned
+off, or its status can be queried using specific commands sent over UART.
+*/
+
 /**
   ******************************************************************************
   * @file           : main.c
@@ -235,21 +242,24 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-int _write(int file, char *ptr, int len) {
-    (void)file;
+int _write(int file, char *ptr, int len)
+{
+  (void)file;
 
-    // Check if the USB device is actually configured and ready.
-    extern USBD_HandleTypeDef hUsbDeviceFS;
-    if (hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED) {
-        return len; // Drop bytes silently if USB cable is unplugged.
-    }
+  // Check if the USB device is actually configured and ready.
+  extern USBD_HandleTypeDef hUsbDeviceFS;
+  if (hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED)
+  {
+    return len; // Drop bytes silently if USB cable is unplugged.
+  }
 
-    // Attempt transmission. If busy, skip this packet to avoid deadlocks.
-    if (CDC_Transmit_FS((uint8_t*)ptr, len) == USBD_BUSY) {
-        return 0;
-    }
+  // Attempt transmission. If busy, skip this packet to avoid deadlocks.
+  if (CDC_Transmit_FS((uint8_t *)ptr, len) == USBD_BUSY)
+  {
+    return 0;
+  }
 
-    return len;
+  return len;
 }
 
 /* USER CODE END 4 */
