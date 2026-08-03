@@ -29,6 +29,9 @@
 
 #include "usbd_cdc_if.h"
 
+#include "led.h"
+#include "cmd.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,7 +53,6 @@
 
 /* USER CODE BEGIN PV */
 
-bool led_state = false;
 const uint32_t debounce_delay = 20; // milliseconds
 
 /* USER CODE END PV */
@@ -103,11 +105,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   bool last_key_state = false;
   bool current_key_state = false;
   bool key_state = false;
   uint32_t current_time = HAL_GetTick();
   uint32_t last_debounce_time = 0;
+
+  uint8_t uart_buffer[1];
+  uint8_t cmd_buffer[16]; // Buffer to store incoming command characters
+  int cmd_index = 0;
 
   while (1)
   {
@@ -130,13 +137,51 @@ int main(void)
       if (current_key_state != key_state)
       {
         key_state = current_key_state;
+
+        // Toggle LED state on button press
         if (key_state)
         {
-          led_state = !led_state;
-          HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, led_state ? GPIO_PIN_RESET : GPIO_PIN_SET);
-          printf("LED state: %s\r\n", led_state ? "ON" : "OFF");
+          led_get_state() ? led_off() : led_on();
         }
       }
+    }
+
+    HAL_StatusTypeDef status = HAL_UART_Receive(&huart1, uart_buffer, sizeof(uart_buffer), 10);
+
+    switch (status)
+    {
+    case HAL_OK:
+      // Accumulate received characters into the command buffer until a null terminator is received
+      if (cmd_index <= sizeof(cmd_buffer) - 1)
+      {
+        cmd_buffer[cmd_index] = uart_buffer[0];
+        ++cmd_index;
+
+        if (uart_buffer[0] == 0)
+        {
+          // Null terminator received, process the command
+          printf("Received command: %s\r\n", cmd_buffer);
+          cmd_process((char *)cmd_buffer, sizeof(cmd_buffer));
+          // Reset the command buffer index for the next command
+          cmd_index = 0;
+        }
+      }
+      else
+      {
+        // Buffer overflow, reset index
+        cmd_index = 0;
+        printf("Command buffer overflow. Resetting buffer.\r\n");
+      }
+      break;
+    case HAL_TIMEOUT:
+      // No data received within the timeout period; this is normal operation.
+      break;
+    case HAL_ERROR:
+      printf("UART receive error occurred.\r\n");
+      break;
+    case HAL_BUSY:
+      printf("UART is busy; cannot receive data at this time.\r\n");
+      break;
     }
   }
 
