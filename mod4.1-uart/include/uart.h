@@ -13,3 +13,5 @@ esp_err_t uart_init(uart_port_t uart_num, const gpio_num_t tx_pin, const gpio_nu
 int uart_send_command(uart_cmd_t cmd);
 
 int uart_read(uart_port_t uart_num, uint8_t *data, uint32_t data_length, TickType_t ticks_to_wait);
+
+esp_err_t uart_clean_rx_buffer(uart_port_t uart_num);

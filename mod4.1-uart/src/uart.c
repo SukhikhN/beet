@@ -43,3 +43,8 @@ int uart_read(uart_port_t uart_num, uint8_t *data, uint32_t data_length, TickTyp
 
     return bytes_read;
 }
+
+esp_err_t uart_clean_rx_buffer(uart_port_t uart_num)
+{
+    return uart_flush_input(uart_num);
+}

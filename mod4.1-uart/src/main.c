@@ -36,6 +36,7 @@ void led_off()
 
 void led_status()
 {
+    uart_clean_rx_buffer(UART_NUM_1); // Clear any previous data in the RX buffer
     uart_send_command(UART_CMD_LED_STATUS);
 
     uint8_t uart_data[16];
